@@ -7,9 +7,9 @@ echo "[ INFO ] Starting checking programs..."
 
 programs=( git node zsh java )
 
-function doUncompress
+function doDecompress
 {
-		echo "===> uncompressing $1"
+		echo "===> decompressing $1"
 }
 
 function doDownload
@@ -19,6 +19,8 @@ function doDownload
 
 function doInstall 
 {
+		doDownload $1
+		doDecompress $1
 		echo "===> installing $1"		
 }
 
@@ -31,6 +33,7 @@ function doCheck
 				echo "[ OK ] $program is installed"
 		else
 				echo "[ WARN ] $1 is not found"
+				doInstall $1
 		fi
 }
 
