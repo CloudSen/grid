@@ -1,4 +1,6 @@
 # Grid
 
-To make life more easier
+Automic Installer For Linux.  
+
+To make life more easier.  
 
