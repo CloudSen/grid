@@ -3,9 +3,8 @@
 # Author: CloudS3n
 # Desc: check installed and uninstall system programs
 
-
 function checkParameters() {
-	popSoft=$1
+	local popSoft=$1
 	if [[] $# == 0 || -z $popSoft ]]; then
 		log error "No soft name passed to checker shell."
 		exit
@@ -13,7 +12,6 @@ function checkParameters() {
 }
 
 function checkSystemInfo() {
-	
 	local machine="$(uname --machine)"
 	local release="$(head -n 1 /etc/os-release)"
 	local release="${release^^}"
@@ -40,15 +38,15 @@ function checkSystemInfo() {
 	esac
 }
 
-function checkProgram
-{
+function checkProgram() {
 	local softName=$1
 	checkParameters $1
 	log common "Checking $softName ..."
-	if [[ -x "$(command -v $softName)" ]]
-	then
+	if [[ -x "$(command -v $softName)" ]]; then
 		log ok "$softName exists, no need to install."
 	else
 		./installer/installerAdaptor.sh $softName
 	fi
 }
+
+checkSystemInfo
