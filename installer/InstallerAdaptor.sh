@@ -16,37 +16,35 @@ source ./logger/Logger.sh $logFlag
 
 log info "Running Installer Adaptor"
 
-function checkParameters()
-{
+function checkParameters() {
     local release=$1
     local softName=$2
-    if [[ -z $release || -z $softName]] ; then
+    if [[ -z $release || -z $softName ]]; then
         log error "No release or soft name passed to installer adaptor."
         exit
     fi
 }
 
-function selectInstaller()
-{
+function selectInstaller() {
     local release=$1
     local softName=$2
 
     checkParameters $1 $2
 
     case $release in
-        UBUNTU)
-            ./installer/UbuntuInstaller.sh $softName
-            ;;
-        CENTOS)
-            ./installer/CentOSInstaller.sh $softName
-            ;;
-        ARCH)
-            ./installer/ArchLinuxInstaller.sh $softName
-            ;;
-        *)
-            logger error "Can not find installer for $release"
-            exit
-            ;;
+    UBUNTU)
+        ./installer/UbuntuInstaller.sh $softName
+        ;;
+    CENTOS)
+        ./installer/CentOSInstaller.sh $softName
+        ;;
+    ARCH)
+        ./installer/ArchLinuxInstaller.sh $softName
+        ;;
+    *)
+        logger error "Can not find installer for $release"
+        exit
+        ;;
     esac
 }
 
