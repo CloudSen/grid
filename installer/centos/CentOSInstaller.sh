@@ -23,15 +23,15 @@ function doInstall() {
     case $softName in
     git)
         log common "Installing git"
-        # ./installer/centos/softInstaller/GitInstaller.sh
+        # ./installer/centos/soft/GitInstaller.sh
         ;;
     ssh)
         log common "Installing open-ssh"
-        # ./installer/centos/softInstaller/OpenSSHInstaller.sh
+        # ./installer/centos/soft/OpenSSHInstaller.sh
         ;;
     zsh)
         log common "Installing zsh"
-        # ./installer/centos/softInstaller/ZshInstaller.sh
+        # ./installer/centos/soft/ZshInstaller.sh
         ;;
     *)
         log error "Sorry, $softName is not support now."
