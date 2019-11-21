@@ -33,13 +33,13 @@ function selectInstaller() {
 
     case $release in
     UBUNTU)
-        ./installer/UbuntuInstaller.sh $softName
+        ./installer/ubuntu/UbuntuInstaller.sh $softName
         ;;
     CENTOS)
-        ./installer/CentOSInstaller.sh $softName
+        ./installer/centos/CentOSInstaller.sh $softName
         ;;
     ARCH)
-        ./installer/ArchLinuxInstaller.sh $softName
+        ./installer/arch/ArchLinuxInstaller.sh $softName
         ;;
     *)
         logger error "Can not find installer for $release"
