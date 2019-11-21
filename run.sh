@@ -11,7 +11,7 @@ else
 	showVerbose=0
 fi
 
-source ./logger/logger.sh $showVerbose
+source ./logger/Logger.sh $showVerbose
 
 ## Welcome
 log logo "******************************************************************************************"
@@ -31,7 +31,7 @@ else
 fi
 
 ## Pass soft to Checker
-source ./checker/checker.sh
+source ./checker/Checker.sh
 for softName in "${popSoft[@]}"; do
 	checkProgram $softName
 done
