@@ -22,19 +22,19 @@ ltgray='\033[0;37m'
 dkgray='\033[1;30m'
 
 ## common prefix
-infoPrefix='[ INFO ] '
-warnPrefix='[ WARN ] '
-errorPrefix='[ ERROR ] '
-okPrefix='[ OK ] '
-donePrefix='[ DONE ] '
-commonPrefix='===> '
+infoPrefix='[ INFO ]'
+warnPrefix='[ WARN ]'
+errorPrefix='[ ERROR ]'
+okPrefix='[ OK ]'
+donePrefix='[ DONE ]'
+commonPrefix='===>'
 
 function log() {
     level=$1
     msg=$2
     debugLevel=(info common)
 
-    if [[ $enableVerbose != 1 && -n $(printf "${debugLevel[@]}" | grep -w "${level}") ]]; then
+    if [[ $enableVerbose != 1 && -n "$(printf '%s\n' ${debugLevel[@]} | grep -w ${level})" ]]; then
         return 0
     fi
 
