@@ -45,6 +45,7 @@ function checkProgram() {
 	if [[ -x "$(command -v $softName)" ]]; then
 		log ok "$softName exists, no need to install."
 	else
+		log warn "$softName not exists, will install latter."
 		./installer/installerAdaptor.sh $softName
 	fi
 }
