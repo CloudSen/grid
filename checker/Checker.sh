@@ -5,7 +5,7 @@
 
 function checkParameters() {
 	local popSoft=$1
-	if [[] $# == 0 || -z $popSoft ]]; then
+	if [[ $# == 0 || -z $popSoft ]]; then
 		log error "No soft name passed to checker shell."
 		exit
 	fi
