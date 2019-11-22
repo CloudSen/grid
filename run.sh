@@ -3,6 +3,14 @@
 # Author: CloudS3n
 # Linux Automic Installer
 
+## Change permission
+chmod +x run.sh
+chmod +x ./checker/*.sh
+chmod +x ./logger/*.sh
+chmod +x ./installer/*.sh
+chmod +x ./installer/centos/*.sh
+chmod +x ./installer/ubuntu/*.sh
+
 showVerbose=$1
 
 if [[ $# != 0 && $showVerbose == '-q' ]]; then
