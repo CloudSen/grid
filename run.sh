@@ -19,6 +19,7 @@ else
 	showVerbose=0
 fi
 
+## Load log system.
 source ./logger/Logger.sh $showVerbose
 
 ## Welcome
