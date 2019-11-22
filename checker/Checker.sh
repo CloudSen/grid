@@ -3,6 +3,9 @@
 # Author: CloudS3n
 # Desc: check installed and uninstall system programs
 
+## Load log system
+source ./logger/Logger.sh
+
 function checkParameters() {
 	local popSoft=$1
 	if [[ $# == 0 || -z $popSoft ]]; then
@@ -17,7 +20,7 @@ function checkSystemInfo() {
 	local release="${release^^}"
 
 	if [[ $machine != 'x86_64' && $machine != 'aarch64' ]]; then
-		log error "Sorry, this shell only support x86_64 or aarch64  machine currently, But U can implement by yourself."
+		log error "Sorry, this shell only support x86_64 or aarch64 machine currently, But you can implement by yourself."
 		exit
 	fi
 
