@@ -16,8 +16,8 @@ function checkSystemInfo() {
 	local release="$(head -n 1 /etc/os-release)"
 	local release="${release^^}"
 
-	if [[ $machine != 'x86_64' ]]; then
-		log error "Sorry, this shell only support x86_64 machine currently, But U can implement by yourself."
+	if [[ $machine != 'x86_64' && $machine != 'aarch64' ]]; then
+		log error "Sorry, this shell only support x86_64 or aarch64  machine currently, But U can implement by yourself."
 		exit
 	fi
 
@@ -46,7 +46,7 @@ function checkProgram() {
 		log ok "$softName exists, no need to install."
 	else
 		log warn "$softName not exists, will install latter."
-		./installer/installerAdaptor.sh $softName
+		./installer/InstallerAdaptor.sh $softName
 	fi
 }
 
