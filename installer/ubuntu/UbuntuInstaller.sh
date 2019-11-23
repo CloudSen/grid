@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Author: CloudS3n
+# Author: CloudS3n Finn
 # Date: 2019-11-23
 # Installer For Ubuntu x86_64 or aarch64.
 # $1: Soft Name, Not Null.

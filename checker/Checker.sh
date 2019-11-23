@@ -3,6 +3,9 @@
 # Author: CloudS3n
 # Desc: check installed and uninstall system programs
 
+## Load log system
+source ./logger/Logger.sh
+
 function checkParameters() {
 	local popSoft=$1
 	if [[ $# == 0 || -z $popSoft ]]; then
