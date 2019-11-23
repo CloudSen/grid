@@ -47,4 +47,4 @@ for softName in "${popSoft[@]}"; do
 	checkProgram $softName
 done
 
-log "done" "Spend Time: $SECOND s" "$showVerbose"
+log "done" "Spend Time: $SECONDS s" "$showVerbose"
