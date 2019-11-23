@@ -5,8 +5,12 @@
 # $# must greater than 2
 # $1: PID
 # $2: MSG
+# usage:
+# ./xxx.sh &
+# pid=$!
+# ./logger/ProgressBar.sh "$pid" "$msg"
 
-source ./logger/Logger.sh
+source ./common/color.sh
 
 function taskProgress() {
     local spin=('|' '/' '-' '\')
@@ -16,12 +20,12 @@ function taskProgress() {
     local msgLen=${#2}
     local progressFullLen=$(($maxLen - $msgLen))
     local progressLen=0
-    local msg="${blue}[${nc}$2${blue}]${nc}"
+    local msg="${blue}[${2}]${nc}"
 
     printf "$msg"
     while kill -0 $1 2>/dev/null; do
         printf "${stuff[${fullFlag}]}"
-        ((progressLen++))
+        (( progressLen++ ))
         if (($progressLen == $progressFullLen)); then
             fullFlag=$((($fullFlag + 1) % 2))
             printf "\r${msg}${stuff[${fullFlag}]}"
@@ -30,9 +34,14 @@ function taskProgress() {
         sleep 0.1
     done
 
-    until (($progressLen == $progressFullLen)); do
+    until (( ($progressLen == $progressFullLen) && ${fullFlag} == 1 )); do
         printf "${stuff[${fullFlag}]}"
         ((progressLen++))
+	if [[ ($progressLen == $progressFullLen) && ${fullFlag} == 0 ]]; then
+		fullFlag=1
+		printf "\r${msg}${stuff[${fullFlag}]}"
+		progressLen=1
+	fi
     done
-    log done ""
+    printf "${green}${donePrefix}${nc}"
 }

@@ -1,40 +1,30 @@
 #!/bin/bash
 
 # Author: CloudS3n
-# Common Log Shell
-# $enableVerbose: if 1 or null, enable verbose log print, if 0, disable verbose log print
+# Common Logger.
+# $1: level.
+# $2: msg.
+# $3: if 1 or null, enable verbose log print, if 0, disable verbose log print.
+# usage: ./logger/Logger.sh $1 $2 $3
+
+
+source ./common/Color.sh
+source ./common/Prefix.sh
 
 ## print verbose log?
-enableVerbose=$1
+showVerbose=$3
 
-if [[ $# -lt 1 || $enableVerbose != 1 && $enableVerbose != 0 ]]; then
-    enableVerbose=1
+if [[ $# < 3 || $showVerbose != 1 && $showVerbose != 0 ]]; then
+    showVerbose=1
 fi
 
-## color
-nc='\033[0m'
-red='\033[0;31m'
-green='\033[0;32m'
-blue='\033[0;34m'
-yellow='\033[1;33m'
-ltgreen='\033[1;32m'
-ltgray='\033[0;37m'
-dkgray='\033[1;30m'
-
-## common prefix
-infoPrefix='[ INFO ]'
-warnPrefix='[ WARN ]'
-errorPrefix='[ ERROR ]'
-okPrefix='[ OK ]'
-donePrefix='[ DONE ]'
-commonPrefix='===>'
-
 function log() {
-    level=$1
-    msg=$2
-    debugLevel=(info common)
+    local level=$1
+    local msg=$2
+    local showVerbose=$3
+    local debugLevel=(info common)
 
-    if [[ $enableVerbose != 1 && -n "$(printf '%s\n' ${debugLevel[@]} | grep -w ${level})" ]]; then
+    if [[ $showVerbose != 1 && -n "$(printf '%s\n' ${debugLevel[@]} | grep -w ${level})" ]]; then
         return 0
     fi
 
@@ -60,8 +50,14 @@ function log() {
     common)
         echo -e "${dkgray}$commonPrefix}${msg}${nc}"
         ;;
+    short)
+        echo -e "${dkgray}$commonPrefixShort}${msg}${nc}"
+        ;;
     *)
         echo -e "${dkgray}$commonPrefix}${msg}${nc}"
         ;;
     esac
 }
+
+log "$1" "$2" $showVerbose
+

@@ -6,7 +6,7 @@
 function checkParameters() {
 	local popSoft=$1
 	if [[ $# == 0 || -z $popSoft ]]; then
-		log error "No soft name passed to checker shell."
+		log error "No soft name passed to checker shell." "$showVerbose"
 		exit
 	fi
 }
@@ -17,22 +17,26 @@ function checkSystemInfo() {
 	local release="${release^^}"
 
 	if [[ $machine != 'x86_64' && $machine != 'aarch64' ]]; then
-		log error "Sorry, this shell only support x86_64 or aarch64  machine currently, But U can implement by yourself."
+		log error "Sorry, this shell only support x86_64 or aarch64  machine currently, But U can implement by yourself." "$showVerbose"
 		exit
 	fi
 
 	case $release in
 	*CENTOS*)
-		log info "Your distribution is CentOS $machine."
+		log info "Your distribution is CentOS $machine." "$showVerbose"
+		release="CENTOS"
 		;;
 	*UBUNTU*)
-		log info "Your distribution is Ubuntu $machine."
+		log info "Your distribution is Ubuntu $machine." "$showVerbose"
+		release="UBUNTU"
 		;;
 	*ARCH*)
-		log info "Your distribution is ArchLinux $machine."
+		log info "Your distribution is ArchLinux $machine." "$showVerbose"
+		release="ARCH"
 		;;
 	*)
-		log error "UNKNOWN Linux Distribution."
+		log error "UNKNOWN Linux Distribution." "$showVerbose"
+
 		exit
 		;;
 	esac
@@ -41,12 +45,16 @@ function checkSystemInfo() {
 function checkProgram() {
 	local softName=$1
 	checkParameters $1
-	log common "Checking $softName ..."
+	local release=$?
+	log common "Checking $softName ..." "$showVerbose"
+
 	if [[ -x "$(command -v $softName)" ]]; then
-		log ok "$softName exists, no need to install."
+		log ok "$softName exists, no need to install." "$showVerbose"
+
 	else
-		log warn "$softName not exists, will install latter."
-		./installer/InstallerAdaptor.sh $softName
+		log warn "$softName not exists, will install latter." "$showVerbose"
+
+		./installer/InstallerAdaptor.sh "$release" "$softName" "$showVerbose"
 	fi
 }
 
